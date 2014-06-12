@@ -4,12 +4,12 @@
 1. Install the precommit-hook module, saving it as a development dependency
 
     `npm i precommit-hook --save-dev`
-1. **Optional:** If you would like the precommit hook to run jshint to ONLY apply to files that have been staged for commit, rather than the entire project, follow these steps.
+1. **Optional:** If you would like the precommit hook to run jshint to ONLY apply to files tracked files that have been changed since the last commit, rather than the entire project, follow these steps.
     1. Create file `/scripts/lint_diff` containing the following code
         ```
         #!/bin/sh
         
-        jshint $(git diff --cached --name-only --diff-filter=ACM | grep ".js$")
+        jshint $(git diff HEAD --name-only --diff-filter=ACM | grep ".js$")
         ```
     1. chmod +x /scripts/lint_diff
 1. Make the following changes to *package.json*
